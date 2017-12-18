@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.egvideowallpaper" >
+    <application  >
+
+        <service android:name=".EGVideoWallpaperService"
+            android:permission="android.permission.BIND_WALLPAPER"
+            >
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService"/>
+            </intent-filter>
+            <meta-data android:name="android.service.wallpaper"
+                android:resource="@xml/videowallpaper"
+                />
+        </service>
+    </application>
+</manifest>

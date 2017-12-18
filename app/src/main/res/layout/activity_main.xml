@@ -1,19 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.eg.egwallpaper.MainActivity">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:text="EGWallpaper"
+        android:gravity="center"
+        android:textColor="@color/eg_white"
+        android:textSize="25sp"
+        android:background="@color/eg_purple"
+        android:textStyle="bold"
+        />
+    <Button
+        android:id="@+id/btn_setWallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="设置壁纸"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+        <Button
+            android:id="@+id/btn_setSilence"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingRight="5dp"
+            android:text="设置静音"
+            android:textSize="25sp"
+            />
+        <Button
+            android:id="@+id/btn_cancelSilence"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:textSize="25sp"
+            android:text="取消静音"
+            />
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-</android.support.constraint.ConstraintLayout>
+        android:text="退出"
+        android:textSize="25sp"
+        android:padding="5dp"
+        />
+</LinearLayout>
