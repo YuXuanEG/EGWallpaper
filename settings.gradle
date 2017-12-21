@@ -1,1 +1,1 @@
-include ':app', ':egvideowallpaper'
+include ':app', ':egvideowallpaper', ':boommenu'

@@ -1,20 +1,32 @@
 package com.eg.egwallpaper;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
+import com.eg.egwallpaper.egwallpaper.BuilderManager;
 import com.eg.egwallpaper.egwallpaper.EGWallpaperContract;
 import com.eg.egwallpaper.egwallpaper.EGWallpaperPresenter;
+import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
+import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
+import com.nightonke.boommenu.BoomMenuButton;
+import com.nightonke.boommenu.ButtonEnum;
+import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class MainActivity extends AppCompatActivity implements EGWallpaperContract.View {
 
     private EGWallpaperPresenter mWallpaperPresenter;
+    @BindView(R.id.bmb)
+    public BoomMenuButton bmb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +36,48 @@ public class MainActivity extends AppCompatActivity implements EGWallpaperContra
         mWallpaperPresenter = new EGWallpaperPresenter(this);
         mWallpaperPresenter.setContext(this);
         mWallpaperPresenter.subscribe();
+
+        initView();
+    }
+
+    private void initView() {
+        List wallpaper = new ArrayList<Integer>();
+        wallpaper.add(R.string.set_wallpaper);
+        wallpaper.add(R.string.set_silence);
+        wallpaper.add(R.string.cancel_silence);
+        wallpaper.add(R.string.back);
+
+        bmb.setButtonEnum(ButtonEnum.TextOutsideCircle);
+        bmb.setPiecePlaceEnum(PiecePlaceEnum.DOT_4_2);
+        bmb.setButtonPlaceEnum(ButtonPlaceEnum.SC_4_2);
+        for (int i = 0; i < bmb.getPiecePlaceEnum().pieceNumber(); i++) {
+            bmb.addBuilder(BuilderManager.getTextOutsideCircleButtonBuilder()
+                    .normalTextRes((int) wallpaper.get(i))
+                    .listener(new OnBMClickListener() {
+                        @Override
+                        public void onBoomButtonClick(int index) {
+                            switch (index) {
+                                case 0://设置壁纸
+                                    bmb.setAutoHide(true);
+                                    mWallpaperPresenter.setWallpaper();
+                                    break;
+                                case 1://设置静音
+                                    bmb.setAutoHide(false);
+                                    mWallpaperPresenter.setSilence();
+                                    break;
+                                case 2://取消静音
+                                    bmb.setAutoHide(false);
+                                    mWallpaperPresenter.cancelSilence();
+                                    break;
+                                case 3://退出
+                                    bmb.setAutoHide(true);
+                                    finish();
+                                    break;
+                            }
+                            Toast.makeText(getApplicationContext(), "click" + index, Toast.LENGTH_SHORT).show();
+                        }
+                    }));
+        }
     }
 
     @Override
@@ -31,23 +85,6 @@ public class MainActivity extends AppCompatActivity implements EGWallpaperContra
         mWallpaperPresenter = checkNotNull((EGWallpaperPresenter) presenter);
     }
 
-    @OnClick({R.id.btn_cancelSilence,R.id.btn_setSilence,R.id.btn_setWallpaper,R.id.btn_back})
-    void clickDo(View view){
-        switch (view.getId()) {
-            case R.id.btn_back:
-                finish();
-                break;
-            case R.id.btn_cancelSilence:
-                mWallpaperPresenter.cancelSilence();
-                break;
-            case R.id.btn_setSilence:
-                mWallpaperPresenter.setSilence();
-                break;
-            case R.id.btn_setWallpaper:
-                mWallpaperPresenter.setWallpaper();
-                break;
-        }
-    }
 
     @Override
     protected void onDestroy() {

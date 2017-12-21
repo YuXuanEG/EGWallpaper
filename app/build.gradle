@@ -36,4 +36,5 @@ dependencies {
     implementation "com.jakewharton:butterknife-compiler:$rootProject.butterknife"
     implementation "com.jakewharton:butterknife:$rootProject.butterknife"
     implementation project(':egvideowallpaper')
+    implementation project(':boommenu')
 }
