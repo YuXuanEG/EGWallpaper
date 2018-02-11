@@ -58,19 +58,17 @@ public class MainActivity extends AppCompatActivity implements EGWallpaperContra
                         public void onBoomButtonClick(int index) {
                             switch (index) {
                                 case 0://设置壁纸
-                                    bmb.setAutoHide(true);
                                     mWallpaperPresenter.setWallpaper();
                                     break;
                                 case 1://设置静音
-                                    bmb.setAutoHide(false);
                                     mWallpaperPresenter.setSilence();
+                                    mWallpaperPresenter.setWallpaper();
                                     break;
                                 case 2://取消静音
-                                    bmb.setAutoHide(false);
                                     mWallpaperPresenter.cancelSilence();
+                                    mWallpaperPresenter.setWallpaper();
                                     break;
                                 case 3://退出
-                                    bmb.setAutoHide(true);
                                     finish();
                                     break;
                             }
