@@ -41,18 +41,18 @@ public class MainActivity extends AppCompatActivity implements EGWallpaperContra
     }
 
     private void initView() {
-        List wallpaper = new ArrayList<Integer>();
-        wallpaper.add(R.string.set_wallpaper);
-        wallpaper.add(R.string.set_silence);
-        wallpaper.add(R.string.cancel_silence);
-        wallpaper.add(R.string.back);
+        List wallpaperItemNames = new ArrayList<Integer>();
+        wallpaperItemNames.add(R.string.set_wallpaper);
+        wallpaperItemNames.add(R.string.set_silence);
+        wallpaperItemNames.add(R.string.cancel_silence);
+        wallpaperItemNames.add(R.string.back);
 
         bmb.setButtonEnum(ButtonEnum.TextOutsideCircle);
         bmb.setPiecePlaceEnum(PiecePlaceEnum.DOT_4_2);
         bmb.setButtonPlaceEnum(ButtonPlaceEnum.SC_4_2);
         for (int i = 0; i < bmb.getPiecePlaceEnum().pieceNumber(); i++) {
             bmb.addBuilder(BuilderManager.getTextOutsideCircleButtonBuilder()
-                    .normalTextRes((int) wallpaper.get(i))
+                    .normalTextRes((int) wallpaperItemNames.get(i))
                     .listener(new OnBMClickListener() {
                         @Override
                         public void onBoomButtonClick(int index) {
